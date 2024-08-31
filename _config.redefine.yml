@@ -157,11 +157,11 @@ home_banner:
     style: default # default, reverse, center
     # Social links
     links:
-      github: https://github.com/soslane # your GitHub URL
+      github: https://github.com/soslane/hexoweb # your GitHub URL
       instagram: # your Instagram URL
       zhihu: https://zhihu.com/lanechow # your ZhiHu URL
       twitter:  # your twitter URL
-      email: soslane@proton.me # your email
+      email: admin@iwc.us.kg # your email
       # ...... # you can add more
     # Social links with QRcode drawers
     qrs:
