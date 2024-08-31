@@ -1,0 +1,71 @@
+---
+layout:       post
+title:        "Windows server FTP服务器"
+author:       "Gweek"
+header-style: text
+catalog:      true
+tags:
+    - Windows server
+---
+
+## 一、FTP服务器
+
+文件传输协议（File Transfer Protocol，FTP）是用来在两台计算机之间传输文件的通信协议，这两台计算机，一台是FTP服务器，一台是FTP客户端。FTP客户端可以从FTP服务器下载文件，也可以将文件上传到FTP服务器。默认端口21。
+
+通常，用户需要使用FTP客户端软件（如FileZilla、WinSCP等）与FTP服务器建立连接，并提供有效的身份验证凭据（如用户名和密码）。一旦连接成功，用户就可以通过FTP客户端浏览服务器上的文件和目录，并执行所需的文件操作。
+
+## 二、部署
+
+在计算机“DNS1”上通过“服务器管理器”安装Web服务器（IIS）角色，同时也安装了FTP服务器。
+在FTP服务器上创建一个新网站“ftp”，使用户在客户端计算机上能通过IP地址和域名进行访问。
+
+ **1、创建使用IP地址访问的FTP站点**
+ 
+创建使用IP地址访问的FTP站点的具体步骤如下。
+
+- 准备FTP主目录
+    
+在C盘上创建文件夹“C:\ftp”作为FTP主目录，并在其文件夹同存放一个文件“ftile1.txt”，供用户在客户端计算机上下载和上传测试。
+
+- 创建FTP站点
+
+![https://jsd.cdn.zzko.cn/gh/soslane/picgo@main/path/20240522132224.png](https://cdn.jsdelivr.net/gh/soslane/picgo/path/20240522132224.png)
+
+![https://jsd.cdn.zzko.cn/gh/soslane/picgo@main/path/20240522132300.png](https://cdn.jsdelivr.net/gh/soslane/picgo/path/20240522132300.png)
+
+![https://jsd.cdn.zzko.cn/gh/soslane/picgo@main/path/20240522132433.png](https://cdn.jsdelivr.net/gh/soslane/picgo/path/20240522132433.png)
+
+![https://jsd.cdn.zzko.cn/gh/soslane/picgo@main/path/20240522132545.png](https://cdn.jsdelivr.net/gh/soslane/picgo/path/20240522132545.png)
+
+- 测试FTP站点
+
+用户在客户端计算机win10-1上，打开浏览器或资源管理器，输入ftp://192.168.10.1就可以访问刚才建立的FTP站点。
+
+**2、创建使用域名访问的FTP站点**
+
+- 在DNS区域中创建别名
+
+![https://jsd.cdn.zzko.cn/gh/soslane/picgo@main/path/20240522132709.png](https://cdn.jsdelivr.net/gh/soslane/picgo/path/20240522132709.png)
+
+**3、使用不同的端口创建FTP站点**
+
+- 在IIS管理器中，找到刚刚创建的FTP站点，在左侧的 "连接" 部分中选择该站点。
+    
+- 在右侧的 "操作" 面板中，选择 "绑定"。
+    
+- 在"站点绑定" 对话框中，点击 "添加"。
+    
+- 在 "添加站点绑定" 对话框中，选择 "FTP" 作为类型，然后输入您想要使用的端口号，     例如2121。
+    
+- 单击 "确定" 完成端口设置。
+
+**4、使用不同的IP创建FTP站点**
+
+- 在 Windows Server 2016 中，您可以配置多个 IP 地址以供服务器使用。确保您的服务器有多个可用的 IP 地址，以便为 FTP 站点指定不同的 IP 地址。
+    
+- 在 IIS 管理器中，找到您刚刚创建的FTP站点，在左侧的"连接"部分中选择该站点。
+- 在右侧的 "操作" 面板中，选择 "绑定"。
+- 在 "站点绑定" 对话框中，点击 "添加"。
+- 在 "添加站点绑定" 对话框中，选择 "FTP" 作为类型。
+- 在 IP 地址下拉菜单中选择要为 FTP 站点使用的 IP 地址。
+- 输入端口号，例如默认的 FTP 端口 21，然后单击 "确定"。

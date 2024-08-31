@@ -1,0 +1,169 @@
+---
+layout:       post
+title:        "Linux NFS服务器"
+author:       "Gweek"
+header-style: text
+catalog:      true
+tags:
+    - Linux
+    
+---
+
+
+
+## 一、NFS服务
+
+NFS（Network File System）是一种用于在网络上共享文件系统的协议，它允许不同计算机之间通过网络共享文件和目录。NFS 最初由 Sun Microsystems 开发，并成为了 UNIX 和类 UNIX 系统中最常见的文件共享协议之一。
+
+## 二、NFS配置
+
+NFS服务配置文件在**/etc/exports**，配置参数其结构如下：
+
+**每行代表一个共享配置**：每行表示一个要共享的目录以及该目录的共享参数。
+
+**目录路径**：在每行的开头指定要共享的目录路径。
+
+**共享参数**：在目录路径之后，您可以指定一系列的共享参数，用于控制客户端对共享的访问权限和行为。
+
+![](https://raw.githubusercontent.com/soslane/picgo/main/path/202407081820929.png)
+
+以上配置表示共享了 /data 目录给所有客户端，允许读写操作，并禁用了根用户映射；同时，将 /home 目录只读共享给 192.168.1.0/24 子网下的客户端，并要求数据同步写入磁盘。
+
+常用的共享参数：
+
+**rw**：可读可写，允许客户端对共享目录执行读取和写入操作。
+
+**ro**：只读，允许客户端读取共享目录中的文件，但不允许写入。
+
+**sync**：数据同步，NFS 服务器应立即将数据写入磁盘，以确保数据的一致性。
+
+**async**：异步写入，允许 NFS 服务器将数据缓存，并在稍后的时间异步写入磁盘。
+
+**no_root_squash**：禁用根用户映射，允许客户端的 root 用户拥有与服务器上相同的权限。
+
+**root_squash**：启用根用户映射，默认情况下将客户端的 root 用户映射为匿名用户。
+
+**all_squash**：将所有客户端用户映射为匿名用户（nfsnobody）。
+
+## 三、举个栗子
+**要求：NFS共享一个目录/data，客户机挂载NFS共享**
+
+首先关闭selinux
+
+`vim /etc/selinux/config`    编辑selinux配置文件
+
+`sestatus`                   查看selinnx状态，如果还是enable，reboot一下
+或者临时关闭防火墙
+`systemctl stop firewalld
+setenforce 0`
+
+步骤 1：安装 NFS 服务器软件包
+
+`yum install nfs-utils rpcbind -y`
+
+步骤 2：配置共享目录
+
+`mkdir /data`
+
+编辑 NFS 服务器的共享配置文件 /etc/exports，添加要共享的目录和权限设置。
+
+`vim /etc/exports`
+
+共享 /data 目录给所有客户端
+
+`/data    *(rw,sync,no_root_squash)`
+
+步骤 3：重启 NFS 服务
+
+`systemctl restart nfs-server
+systemctl enable nfs-server`
+
+步骤 4：设置防火墙规则
+
+`firewall-cmd --permanent --add-service=nfs
+firewall-cmd --reload`
+
+步骤 5：挂载 NFS 共享（对于客户端）
+
+在客户端系统上，使用 mount 命令挂载 NFS 共享
+
+新建挂载目录
+`mkdir /mnt/nfs
+mount -t nfs <NFS服务器IP>:/data /mnt/nfs`
+
+步骤 6：验证共享是否生效
+
+`ls /mnt/nfs`
+
+如果一切正常，您应该能够在客户端看到共享目录中的文件和目录
+
+## 四、再举个栗子
+
+**要求：搭建一个NFS服务器作为文件共享服务器，让两个Linux客户端同时挂载NFS服务器，实现两个客户端同时共享NFS服务器上的数据。共享目录/data\_share**
+
+NFS服务器：192.168.0.1
+
+Linux客户机1：192.168.0.10
+
+Linux客户机2：192.168.0.20
+
+首先关闭selinux
+
+`vim /etc/selinux/config`    编辑selinux配置文件
+`sestatus`                   查看selinnx状态，如果还是enable，reboot一下
+
+或者临时关闭防火墙
+`systemctl stop firewalld
+setenforce 0`
+
+步骤 1：安装 NFS 服务器软件包
+`yum install nfs-utils rpcbind -y`
+
+`systemctl start nfs`
+
+`systemctl enable nfs`
+
+步骤 2：编辑配置文件
+
+`vim /etc/exports`
+
+![](https://raw.githubusercontent.com/soslane/picgo/main/path/202407081823563.png)
+
+
+步骤 3：配置共享目录
+
+`mkdir /data_share`    创建目录
+
+`echo share_test > /data_share/share.txt`  创建并写入share.txt文档
+
+更改目录权限，配置文件参数all\_squash,客户端权限会降为nfsnobody
+
+`chown -R nfsnobody:nfsnobody /data_share`
+
+`ls -l /data_share/`   查看权限是否设置成功
+
+步骤 4:重启服务器
+
+`systemctl restart nfs`
+
+或者重新加载配置文件
+
+`exportfs -rv`
+
+步骤 5:挂载NFS共享（客户端）
+
+进入客户端，安装nfs-utils
+
+`yum install nfs-utils -y`
+
+`showmount -e 192.168.0.1`    查看NFS服务器共享的目录
+
+`mount -t nfs 192.168.0.1:/data_share /mnt/`  将NFS共享目录/data\_share挂载到客户端/mnt下
+
+步骤 6:测试
+
+`df -h`    检查是否挂载成功
+
+`ls /mnt`  测试能否访问nfs服务器
+
+继续测试能否写入
