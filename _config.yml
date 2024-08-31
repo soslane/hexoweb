@@ -9,7 +9,7 @@ timezone: 'Asia/Shanghai'	# 必填，时区，在国内建议选择上海时间
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://<你的 Github 用户名>.github.io 	# 必填，Github Page 的地址
+url: https://gg.myla.eu.org 	# 必填，Github Page 的地址
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
