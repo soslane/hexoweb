@@ -108,7 +108,7 @@ fontawesome: # Pro v6.2.1
 # Docs: https://redefine-docs.ohevan.com/home/home_banner
 home_banner:
   # Whether to enable home banner
-  enable: true
+  enable: false
   # style of home banner
   style: fixed # static or fixed
   # Home banner image
