@@ -202,12 +202,12 @@ navbar:
     #     Github: https://github.com/EvanNotFound/hexo-theme-redefine
     #     Blog: https://ohevan.com
     #     Friends: /friends
-    Friends: 
-      icon: fa-regular fa-link
-      path: /links/
     Tags:
       icon: fa-regular fa-tags #图标
       path: /tags/ #链接
+    Friends: 
+      icon: fa-regular fa-link
+      path: /links/
     #   submenus:
     #     Link1: /link1
     #     Link2: /link2
