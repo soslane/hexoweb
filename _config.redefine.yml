@@ -296,7 +296,7 @@ articles:
     copy: true # Whether to enable code block copy button
     style: mac # mac | simple
     highlight_theme: # Color scheme for highlightjs code highlighting. For preview, see https://highlightjs.org/examples
-      light: github-dark # light mode theme, support: github, atom-one-light, default
+      light: github # light mode theme, support: github, atom-one-light, default
       dark: github-dark # dark mode theme, support: github-dark, monokai-sublime, vs2015, night-owl, atom-one-dark, nord, tokyo-night-dark, a11y-dark, agate
     font: # Custom font
       enable: false # Whether to enable
@@ -304,10 +304,10 @@ articles:
       url: # Font URL to CSS file
   # Table of contents settings
   toc:
-    enable: true # Whether to enable TOC
+    enable: false # Whether to enable TOC
     max_depth: 3 # TOC depth
     number: false # Whether to add number to TOC automatically
-    expand: true # Whether to expand TOC
+    expand: false # Whether to expand TOC
     init_open: true # Open toc by default
   # Whether to enable copyright notice
   copyright:
