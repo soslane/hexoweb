@@ -68,7 +68,7 @@ global:
     scale: false # scale effect
   # Scroll progress
   scroll_progress:
-    bar: false # progress bar
+    bar: true # progress bar
     percentage: true # percentage
   # Website counter
   website_counter:
@@ -113,7 +113,7 @@ home_banner:
   style: fixed # static or fixed
   # Home banner image
   image: 
-    light: /images/bgtop.jpg # light mode
+    light: /images/bg.webp # light mode
     dark: /images/wallhaven-wqery6-dark.webp # dark mode
   # Home banner title
   title: Fake it till you make it
