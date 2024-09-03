@@ -23,11 +23,11 @@ info:
 # Docs: https://redefine-docs.ohevan.com/basic/defaults
 defaults:
   # Favicon
-  favicon: https://img.myla.eu.org/file/ad9308e6b3653ffe18d1a.png
+  favicon: /images/favicon.png
   # Site logo
   logo: 
   # Site avatar
-  avatar: https://img.myla.eu.org/api/file/88c52fa93062e0ebc295d.jpg
+  avatar: /images/avatar.jpg
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -46,7 +46,7 @@ colors:
 # SITE CUSTOMIZATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/global
 global:
-  # Custom fonts
+  # Custom global fonts
   fonts:
     # Chinese fonts
     chinese: 
@@ -56,6 +56,11 @@ global:
     # English fonts
     english: 
       enable: false # Whether to enable custom english fonts
+      family:  # Font family
+      url:  # Font URL to CSS file
+    # Custom title fonts (navbar, sidebar)
+    title:
+      enable: false # Whether to enable custom title fonts
       family:  # Font family
       url:  # Font URL to CSS file
   # Content max width
@@ -68,7 +73,7 @@ global:
     scale: false # scale effect
   # Scroll progress
   scroll_progress:
-    bar: true # progress bar
+    bar: false # progress bar
     percentage: true # percentage
   # Website counter
   website_counter:
@@ -80,7 +85,9 @@ global:
   # Whether to enable single page experience (using swup). See https://swup.js.org/. similar to pjax
   single_page: true
   # Whether to enable Preloader.
-  preloader: true
+  preloader:
+    enable: false
+    custom_message: # Custom message. If empty, the site title will be displayed
   # Whether to enable open graph
   open_graph: true
   # Google Analytics
@@ -122,6 +129,7 @@ home_banner:
     text: [] # subtitle text, array
     hitokoto:  # 一言配置
       enable: false # Whether to enable hitokoto
+      show_author: false # Whether to show author
       api: https://v1.hitokoto.cn # API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
     typing_speed: 100 # Typing speed (ms)
     backing_speed: 80 # Backing speed (ms)
@@ -158,7 +166,7 @@ home_banner:
     # Social links
     links:
       github: https://github.com/soslane/hexoweb # your GitHub URL
-      instagram: # your Instagram URL
+      instagram: https://pic.myla.eu.org # your Instagram URL
       zhihu: https://zhihu.com/lanechow # your ZhiHu URL
       twitter:  # your twitter URL
       email: admin@iwc.us.kg # your email
@@ -208,10 +216,6 @@ navbar:
     Friends: 
       icon: fa-regular fa-link
       path: /links/
-    #   submenus:
-    #     Link1: /link1
-    #     Link2: /link2
-    #     Link3: /link3
     # ...... # you can add more
   # Navbar search (local search). Requires hexo-generator-searchdb (npm i hexo-generator-searchdb). See https://github.com/theme-next/hexo-generator-searchdb
   search:
@@ -230,7 +234,7 @@ home:
     enable: true # Whether to enable sidebar
     position: right # Sidebar position. left, right
     first_item: info # First item in sidebar. menu, info
-    announcement: Hello and a warm welcome to Gweek, the place where ideas, stories, and insights converge.  # Announcement text
+    announcement: Hello and a warm welcome to Gweek, the place where ideas, stories, and insights converge. # Announcement text
     show_on_mobile: true # Whether to show sidebar navigation on mobile sheet menu
     links:
       Tags: 
@@ -245,6 +249,8 @@ home:
       # ...... # you can add more
   # Article date format
   article_date_format: auto # auto, relative, YYYY-MM-DD, YYYY-MM-DD HH:mm:ss etc.
+  # Article excerpt length
+  excerpt_length: 200 # Max length of article excerpt
   # Article categories visibility
   categories:
     enable: false  # Whether to enable
@@ -288,7 +294,10 @@ articles:
   # Code block settings
   code_block:
     copy: true # Whether to enable code block copy button
-    style: mac # mac | simple
+    style: simple # mac | simple
+    highlight_theme: # Color scheme for highlightjs code highlighting. For preview, see https://highlightjs.org/examples
+      light: github # light mode theme, support: github, atom-one-light, default
+      dark: vs2015 # dark mode theme, support: github-dark, monokai-sublime, vs2015, night-owl, atom-one-dark, nord, tokyo-night-dark, a11y-dark, agate
     font: # Custom font
       enable: false # Whether to enable
       family: # Font family
@@ -329,7 +338,7 @@ comment:
   # Whether to enable comment
   enable: true
   # Comment system
-  system: twikoo # waline, gitalk, twikoo, giscus
+  system: waline # waline, gitalk, twikoo, giscus
   # System configuration
   config:
     # Waline comment system. See https://waline.js.org/
@@ -350,7 +359,7 @@ comment:
     # Twikoo comment system. See https://twikoo.js.org/
     twikoo:
       version: 1.6.36 # Twikoo version, do not modify if you dont know what it is
-      server_url: https://twikoo.myla.eu.org# Twikoo server URL. e.g. https://example.example.com
+      server_url: https://twikoo.myla.eu.org # Twikoo server URL. e.g. https://example.example.com
       region: # Twikoo region. can be empty
     # Giscus comment system. See https://giscus.app/
     giscus:
@@ -376,7 +385,7 @@ footer:
   # Icon in footer, write fontawesome icon code here
   icon: '<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>'
   # The start time of the website, format: YYYY/MM/DD HH:mm:ss
-  start: 2023/8/29 11:58:18
+  start: 2024/8/17 11:45:14
   # Site statistics
   statistics: true # show site statistics or not (total articles, total words)
   # Footer message
@@ -410,7 +419,7 @@ inject:
 plugins:
   # RSS feed. Requires hexo-generator-feed (npm i hexo-generator-feed). See https://github.com/hexojs/hexo-generator-feed
   feed:
-    enable: false # Whether to enable
+    enable: true # Whether to enable
   # Aplayer. See https://github.com/DIYgod/APlayer
   aplayer:
     enable: false # Whether to enable
@@ -450,7 +459,7 @@ cdn:
   # Whether to enable CDN
   enable: false
   # CDN Provider
-  provider: npmmirror # npmmirror, zstatic, sustech, staticfile, bootcdn, cdnjs, jsdelivr, unpkg, custom
+  provider: npmmirror # npmmirror, zstatic, sustech, cdnjs, jsdelivr, unpkg, custom
   # Custom CDN URL
   # format example: https://cdn.custom.com/hexo-theme-redefine/${version}/source/${path}
   # The ${path} must leads to the root of the "source" folder of the theme
