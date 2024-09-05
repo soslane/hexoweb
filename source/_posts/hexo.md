@@ -5,6 +5,7 @@ draft: false
 date: 2024-08-30
 tags:
     - hexo
+thumbnail: "https://img.myla.eu.org/api/file/790de744b616f5b749b2e.png"
 ---
 ### Hexo 是什么
 
