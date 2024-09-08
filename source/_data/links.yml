@@ -3,7 +3,7 @@
   has_thumbnail: false
   list: 
     - name: 我娇贵的小绝怂
-      link: https://bbs.myla.eu.org
+      link: https://myla.eu.org
       description: 我娇贵的小绝怂 社恐综合症 腰椎间盘突出症
       avatar: https://img.myla.eu.org/api/file/127bb855f84f2bed9491b.png
       thumbnail: https://img1.imgtp.com/2023/06/19/Jegvz84P.png # has_thumbnail 为 true 时才需要
@@ -12,15 +12,15 @@
   has_thumbnail: false
   list: 
     - name: Gweek's Blog
-      link: https://gweek.myla.eu.org
+      link: https://blog.myla.eu.org
       description: Gweek's Blog 以Jekyll为基础制作的博客
       avatar: https://img.myla.eu.org/api/file/54a7ba7613ac9df80bbcc.png
     - name: GG Blog
-      link: https://blog.myla.eu.org
+      link: https://bbs.myla.eu.org
       description: 一个简约风格的博客，以Hugo为基础制作的博客
       avatar: https://img.myla.eu.org/api/file/3ca010657880f6bd062c6.png
     - name: Steven Blog
-      link: https://zyc.myla.eu.org
+      link: https://geek.nyc.mn
       description: 儿子的错题本
       avatar: https://pic.myla.eu.org/file/0de32b3d111043a2f23ed.png
     - name: Github Blog
