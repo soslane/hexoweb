@@ -4,9 +4,9 @@ title:        "Windows server 管理文件权限"
 author:       "Gweek"
 header-style: text
 catalog:      true
+date: 2024-05-12
 tags:
     - Windows server
-
 ---
 
 #### **一、分区表格式**
